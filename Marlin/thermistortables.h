@@ -248,224 +248,70 @@ const short temptable_6[][2] PROGMEM = {
    {970*OVERSAMPLENR, 25},
    {978*OVERSAMPLENR, 22},
    {1008*OVERSAMPLENR, 3},
-   {1023*OVERSAMPLENR, 0}  //to allow internal 0 degrees C
+   {1023*OVERSAMPLENR, 0}  //to allow internal 0�C
 };
 #endif
 
 #if (THERMISTORHEATER_0 == 7) || (THERMISTORHEATER_1 == 7) || (THERMISTORHEATER_2 == 7) || (THERMISTORBED == 7) // 100k Honeywell 135-104LAG-J01
 const short temptable_7[][2] PROGMEM = {
-   {1*OVERSAMPLENR, 941},
-   {19*OVERSAMPLENR, 362},
-   {37*OVERSAMPLENR, 299}, //top rating 300C
-   {55*OVERSAMPLENR, 266},
-   {73*OVERSAMPLENR, 245},
-   {91*OVERSAMPLENR, 229},
-   {109*OVERSAMPLENR, 216},
-   {127*OVERSAMPLENR, 206},
-   {145*OVERSAMPLENR, 197},
-   {163*OVERSAMPLENR, 190},
-   {181*OVERSAMPLENR, 183},
-   {199*OVERSAMPLENR, 177},
-   {217*OVERSAMPLENR, 171},
-   {235*OVERSAMPLENR, 166},
-   {253*OVERSAMPLENR, 162},
-   {271*OVERSAMPLENR, 157},
-   {289*OVERSAMPLENR, 153},
-   {307*OVERSAMPLENR, 149},
-   {325*OVERSAMPLENR, 146},
-   {343*OVERSAMPLENR, 142},
-   {361*OVERSAMPLENR, 139},
-   {379*OVERSAMPLENR, 135},
-   {397*OVERSAMPLENR, 132},
-   {415*OVERSAMPLENR, 129},
-   {433*OVERSAMPLENR, 126},
-   {451*OVERSAMPLENR, 123},
-   {469*OVERSAMPLENR, 121},
-   {487*OVERSAMPLENR, 118},
-   {505*OVERSAMPLENR, 115},
-   {523*OVERSAMPLENR, 112},
-   {541*OVERSAMPLENR, 110},
-   {559*OVERSAMPLENR, 107},
-   {577*OVERSAMPLENR, 105},
-   {595*OVERSAMPLENR, 102},
-   {613*OVERSAMPLENR, 99},
-   {631*OVERSAMPLENR, 97},
-   {649*OVERSAMPLENR, 94},
-   {667*OVERSAMPLENR, 92},
-   {685*OVERSAMPLENR, 89},
-   {703*OVERSAMPLENR, 86},
-   {721*OVERSAMPLENR, 84},
-   {739*OVERSAMPLENR, 81},
-   {757*OVERSAMPLENR, 78},
-   {775*OVERSAMPLENR, 75},
-   {793*OVERSAMPLENR, 72},
-   {811*OVERSAMPLENR, 69},
-   {829*OVERSAMPLENR, 66},
-   {847*OVERSAMPLENR, 62},
-   {865*OVERSAMPLENR, 59},
-   {883*OVERSAMPLENR, 55},
-   {901*OVERSAMPLENR, 51},
-   {919*OVERSAMPLENR, 46},
-   {937*OVERSAMPLENR, 41},
-   {955*OVERSAMPLENR, 35},
-   {973*OVERSAMPLENR, 27},
-   {991*OVERSAMPLENR, 17},
-   {1009*OVERSAMPLENR, 1},
-   {1023*OVERSAMPLENR, 0}  //to allow internal 0 degrees C
-};
-#endif
-
-#if (THERMISTORHEATER_0 == 71) || (THERMISTORHEATER_1 == 71) || (THERMISTORHEATER_2 == 71) || (THERMISTORBED == 71) // 100k Honeywell 135-104LAF-J01
-// R0 = 100000 Ohm
-// T0 = 25 °C
-// Beta = 3974
-// R1 = 0 Ohm
-// R2 = 4700 Ohm
-const short temptable_71[][2] PROGMEM = {
-   {35*OVERSAMPLENR, 300},
-   {51*OVERSAMPLENR, 270},
-   {54*OVERSAMPLENR, 265},
-   {58*OVERSAMPLENR, 260},
-   {59*OVERSAMPLENR, 258},
-   {61*OVERSAMPLENR, 256},
-   {63*OVERSAMPLENR, 254},
-   {64*OVERSAMPLENR, 252},
-   {66*OVERSAMPLENR, 250},
-   {67*OVERSAMPLENR, 249},
-   {68*OVERSAMPLENR, 248},
-   {69*OVERSAMPLENR, 247},
-   {70*OVERSAMPLENR, 246},
-   {71*OVERSAMPLENR, 245},
-   {72*OVERSAMPLENR, 244},
-   {73*OVERSAMPLENR, 243},
-   {74*OVERSAMPLENR, 242},
-   {75*OVERSAMPLENR, 241},
-   {76*OVERSAMPLENR, 240},
-   {77*OVERSAMPLENR, 239},
-   {78*OVERSAMPLENR, 238},
-   {79*OVERSAMPLENR, 237},
-   {80*OVERSAMPLENR, 236},
-   {81*OVERSAMPLENR, 235},
-   {82*OVERSAMPLENR, 234},
-   {84*OVERSAMPLENR, 233},
-   {85*OVERSAMPLENR, 232},
-   {86*OVERSAMPLENR, 231},
-   {87*OVERSAMPLENR, 230},
-   {89*OVERSAMPLENR, 229},
-   {90*OVERSAMPLENR, 228},
-   {91*OVERSAMPLENR, 227},
-   {92*OVERSAMPLENR, 226},
-   {94*OVERSAMPLENR, 225},
-   {95*OVERSAMPLENR, 224},
-   {97*OVERSAMPLENR, 223},
-   {98*OVERSAMPLENR, 222},
-   {99*OVERSAMPLENR, 221},
-   {101*OVERSAMPLENR, 220},
-   {102*OVERSAMPLENR, 219},
-   {104*OVERSAMPLENR, 218},
-   {106*OVERSAMPLENR, 217},
-   {107*OVERSAMPLENR, 216},
-   {109*OVERSAMPLENR, 215},
-   {110*OVERSAMPLENR, 214},
-   {112*OVERSAMPLENR, 213},
-   {114*OVERSAMPLENR, 212},
-   {115*OVERSAMPLENR, 211},
-   {117*OVERSAMPLENR, 210},
-   {119*OVERSAMPLENR, 209},
-   {121*OVERSAMPLENR, 208},
-   {123*OVERSAMPLENR, 207},
-   {125*OVERSAMPLENR, 206},
+   {1*OVERSAMPLENR, 500},
+   {46*OVERSAMPLENR, 270}, //top rating 300C
+   {50*OVERSAMPLENR, 265},
+   {54*OVERSAMPLENR, 260},
+   {58*OVERSAMPLENR, 255},
+   {62*OVERSAMPLENR, 250},
+   {67*OVERSAMPLENR, 245},
+   {72*OVERSAMPLENR, 240},
+   {79*OVERSAMPLENR, 235},
+   {85*OVERSAMPLENR, 230},
+   {91*OVERSAMPLENR, 225},
+   {99*OVERSAMPLENR, 220},
+   {107*OVERSAMPLENR, 215},
+   {116*OVERSAMPLENR, 210},
    {126*OVERSAMPLENR, 205},
-   {128*OVERSAMPLENR, 204},
-   {130*OVERSAMPLENR, 203},
-   {132*OVERSAMPLENR, 202},
-   {134*OVERSAMPLENR, 201},
    {136*OVERSAMPLENR, 200},
-   {139*OVERSAMPLENR, 199},
-   {141*OVERSAMPLENR, 198},
-   {143*OVERSAMPLENR, 197},
-   {145*OVERSAMPLENR, 196},
-   {147*OVERSAMPLENR, 195},
-   {150*OVERSAMPLENR, 194},
-   {152*OVERSAMPLENR, 193},
-   {154*OVERSAMPLENR, 192},
-   {157*OVERSAMPLENR, 191},
-   {159*OVERSAMPLENR, 190},
-   {162*OVERSAMPLENR, 189},
-   {164*OVERSAMPLENR, 188},
-   {167*OVERSAMPLENR, 187},
-   {170*OVERSAMPLENR, 186},
-   {172*OVERSAMPLENR, 185},
-   {175*OVERSAMPLENR, 184},
-   {178*OVERSAMPLENR, 183},
-   {181*OVERSAMPLENR, 182},
-   {184*OVERSAMPLENR, 181},
-   {187*OVERSAMPLENR, 180},
-   {190*OVERSAMPLENR, 179},
-   {193*OVERSAMPLENR, 178},
-   {196*OVERSAMPLENR, 177},
-   {199*OVERSAMPLENR, 176},
-   {202*OVERSAMPLENR, 175},
-   {205*OVERSAMPLENR, 174},
-   {208*OVERSAMPLENR, 173},
-   {212*OVERSAMPLENR, 172},
-   {215*OVERSAMPLENR, 171},
-   {219*OVERSAMPLENR, 170},
-   {237*OVERSAMPLENR, 165},
-   {256*OVERSAMPLENR, 160},
-   {300*OVERSAMPLENR, 150},
-   {351*OVERSAMPLENR, 140},
-   {470*OVERSAMPLENR, 120},
-   {504*OVERSAMPLENR, 115},
-   {538*OVERSAMPLENR, 110},
-   {552*OVERSAMPLENR, 108},
-   {566*OVERSAMPLENR, 106},
-   {580*OVERSAMPLENR, 104},
-   {594*OVERSAMPLENR, 102},
-   {608*OVERSAMPLENR, 100},
-   {622*OVERSAMPLENR, 98},
-   {636*OVERSAMPLENR, 96},
-   {650*OVERSAMPLENR, 94},
-   {664*OVERSAMPLENR, 92},
-   {678*OVERSAMPLENR, 90},
-   {712*OVERSAMPLENR, 85},
-   {745*OVERSAMPLENR, 80},
-   {758*OVERSAMPLENR, 78},
-   {770*OVERSAMPLENR, 76},
-   {783*OVERSAMPLENR, 74},
-   {795*OVERSAMPLENR, 72},
-   {806*OVERSAMPLENR, 70},
-   {818*OVERSAMPLENR, 68},
-   {829*OVERSAMPLENR, 66},
-   {840*OVERSAMPLENR, 64},
-   {850*OVERSAMPLENR, 62},
-   {860*OVERSAMPLENR, 60},
-   {870*OVERSAMPLENR, 58},
-   {879*OVERSAMPLENR, 56},
-   {888*OVERSAMPLENR, 54},
-   {897*OVERSAMPLENR, 52},
-   {905*OVERSAMPLENR, 50},
-   {924*OVERSAMPLENR, 45},
-   {940*OVERSAMPLENR, 40},
-   {955*OVERSAMPLENR, 35},
-   {967*OVERSAMPLENR, 30},
-   {970*OVERSAMPLENR, 29},
-   {972*OVERSAMPLENR, 28},
-   {974*OVERSAMPLENR, 27},
-   {976*OVERSAMPLENR, 26},
-   {978*OVERSAMPLENR, 25},
-   {980*OVERSAMPLENR, 24},
-   {982*OVERSAMPLENR, 23},
-   {984*OVERSAMPLENR, 22},
-   {985*OVERSAMPLENR, 21},
-   {987*OVERSAMPLENR, 20},
-   {995*OVERSAMPLENR, 15},
+   {149*OVERSAMPLENR, 195},
+   {160*OVERSAMPLENR, 190},
+   {175*OVERSAMPLENR, 185},
+   {191*OVERSAMPLENR, 180},
+   {209*OVERSAMPLENR, 175},
+   {224*OVERSAMPLENR, 170},
+   {246*OVERSAMPLENR, 165},
+   {267*OVERSAMPLENR, 160},
+   {293*OVERSAMPLENR, 155},
+   {316*OVERSAMPLENR, 150},
+   {340*OVERSAMPLENR, 145},
+   {364*OVERSAMPLENR, 140},
+   {396*OVERSAMPLENR, 135},
+   {425*OVERSAMPLENR, 130},
+   {460*OVERSAMPLENR, 125},
+   {489*OVERSAMPLENR, 120},
+   {526*OVERSAMPLENR, 115},
+   {558*OVERSAMPLENR, 110},
+   {591*OVERSAMPLENR, 105},
+   {628*OVERSAMPLENR, 100},
+   {660*OVERSAMPLENR, 95},
+   {696*OVERSAMPLENR, 90},
+   {733*OVERSAMPLENR, 85},
+   {761*OVERSAMPLENR, 80},
+   {794*OVERSAMPLENR, 75},
+   {819*OVERSAMPLENR, 70},
+   {847*OVERSAMPLENR, 65},
+   {870*OVERSAMPLENR, 60},
+   {892*OVERSAMPLENR, 55},
+   {911*OVERSAMPLENR, 50},
+   {929*OVERSAMPLENR, 45},
+   {944*OVERSAMPLENR, 40},
+   {959*OVERSAMPLENR, 35},
+   {971*OVERSAMPLENR, 30},
+   {981*OVERSAMPLENR, 25},
+   {989*OVERSAMPLENR, 20},
+   {994*OVERSAMPLENR, 15},
    {1001*OVERSAMPLENR, 10},
-   {1006*OVERSAMPLENR, 5},
-   {1010*OVERSAMPLENR, 0},
+   {1005*OVERSAMPLENR, 5},
+   {1023*OVERSAMPLENR, 0}  //to allow internal 0�C
 };
 #endif
-
 #if (THERMISTORHEATER_0 == 8) || (THERMISTORHEATER_1 == 8) || (THERMISTORHEATER_2 == 8) || (THERMISTORBED == 8)
 // 100k 0603 SMD Vishay NTCS0603E3104FXT (4.7k pullup)
 const short temptable_8[][2] PROGMEM = {
@@ -561,78 +407,6 @@ const short temptable_10[][2] PROGMEM = {
    {981*OVERSAMPLENR, 23},
    {1005*OVERSAMPLENR, 5},
    {1016*OVERSAMPLENR, 0}
-};
-#endif
-
-#if (THERMISTORHEATER_0 == 20) || (THERMISTORHEATER_1 == 20) || (THERMISTORHEATER_2 == 20) || (THERMISTORBED == 20) // PT100 with INA826 amp on Ultimaker v2.0 electronics
-/* The PT100 in the Ultimaker v2.0 electronics has a high sample value for a high temperature.
-This does not match the normal thermistor behaviour so we need to set the following defines */
-#if (THERMISTORHEATER_0 == 20)
-# define HEATER_0_RAW_HI_TEMP 16383
-# define HEATER_0_RAW_LO_TEMP 0
-#endif
-#if (THERMISTORHEATER_1 == 20)
-# define HEATER_1_RAW_HI_TEMP 16383
-# define HEATER_1_RAW_LO_TEMP 0
-#endif
-#if (THERMISTORHEATER_2 == 20)
-# define HEATER_2_RAW_HI_TEMP 16383
-# define HEATER_2_RAW_LO_TEMP 0
-#endif
-#if (THERMISTORBED == 20)
-# define HEATER_BED_RAW_HI_TEMP 16383
-# define HEATER_BED_RAW_LO_TEMP 0
-#endif
-const short temptable_20[][2] PROGMEM = {
-{         0*OVERSAMPLENR ,       0     },
-{       227*OVERSAMPLENR ,       1     },
-{       236*OVERSAMPLENR ,       10     },
-{       245*OVERSAMPLENR ,       20     },
-{       253*OVERSAMPLENR ,       30     },
-{       262*OVERSAMPLENR ,       40     },
-{       270*OVERSAMPLENR ,       50     },
-{       279*OVERSAMPLENR ,       60     },
-{       287*OVERSAMPLENR ,       70     },
-{       295*OVERSAMPLENR ,       80     },
-{       304*OVERSAMPLENR ,       90     },
-{       312*OVERSAMPLENR ,       100     },
-{       320*OVERSAMPLENR ,       110     },
-{       329*OVERSAMPLENR ,       120     },
-{       337*OVERSAMPLENR ,       130     },
-{       345*OVERSAMPLENR ,       140     },
-{       353*OVERSAMPLENR ,       150     },
-{       361*OVERSAMPLENR ,       160     },
-{       369*OVERSAMPLENR ,       170     },
-{       377*OVERSAMPLENR ,       180     },
-{       385*OVERSAMPLENR ,       190     },
-{       393*OVERSAMPLENR ,       200     },
-{       401*OVERSAMPLENR ,       210     },
-{       409*OVERSAMPLENR ,       220     },
-{       417*OVERSAMPLENR ,       230     },
-{       424*OVERSAMPLENR ,       240     },
-{       432*OVERSAMPLENR ,       250     },
-{       440*OVERSAMPLENR ,       260     },
-{       447*OVERSAMPLENR ,       270     },
-{       455*OVERSAMPLENR ,       280     },
-{       463*OVERSAMPLENR ,       290     },
-{       470*OVERSAMPLENR ,       300     },
-{       478*OVERSAMPLENR ,       310     },
-{       485*OVERSAMPLENR ,       320     },
-{       493*OVERSAMPLENR ,       330     },
-{       500*OVERSAMPLENR ,       340     },
-{       507*OVERSAMPLENR ,       350     },
-{       515*OVERSAMPLENR ,       360     },
-{       522*OVERSAMPLENR ,       370     },
-{       529*OVERSAMPLENR ,       380     },
-{       537*OVERSAMPLENR ,       390     },
-{       544*OVERSAMPLENR ,       400     },
-{       614*OVERSAMPLENR ,       500     },
-{       681*OVERSAMPLENR ,       600     },
-{       744*OVERSAMPLENR ,       700     },
-{       805*OVERSAMPLENR ,       800     },
-{       862*OVERSAMPLENR ,       900     },
-{       917*OVERSAMPLENR ,       1000     },
-{       968*OVERSAMPLENR ,       1100     }
 };
 #endif
 
@@ -780,146 +554,241 @@ const short temptable_55[][2] PROGMEM = {
 };
 #endif
 
-#if (THERMISTORHEATER_0 == 60) || (THERMISTORHEATER_1 == 60) || (THERMISTORHEATER_2 == 60) || (THERMISTORBED == 60) // Maker's Tool Works Kapton Bed Thermister
-const short temptable_60[][2] PROGMEM = {
-   {51*OVERSAMPLENR, 272},
-   {61*OVERSAMPLENR, 258},
-   {71*OVERSAMPLENR, 247},
-   {81*OVERSAMPLENR, 237},
-   {91*OVERSAMPLENR, 229},
-   {101*OVERSAMPLENR, 221},
-   {131*OVERSAMPLENR, 204},
-   {161*OVERSAMPLENR, 190},
-   {191*OVERSAMPLENR, 179},
-   {231*OVERSAMPLENR, 167},
-   {271*OVERSAMPLENR, 157},
-   {311*OVERSAMPLENR, 148},
-   {351*OVERSAMPLENR, 140},
-   {381*OVERSAMPLENR, 135},
-   {411*OVERSAMPLENR, 130},
-   {441*OVERSAMPLENR, 125},
-   {451*OVERSAMPLENR, 123},
-   {461*OVERSAMPLENR, 122},
-   {471*OVERSAMPLENR, 120},
-   {481*OVERSAMPLENR, 119},
-   {491*OVERSAMPLENR, 117},
-   {501*OVERSAMPLENR, 116},
-   {511*OVERSAMPLENR, 114},
-   {521*OVERSAMPLENR, 113},
-   {531*OVERSAMPLENR, 111},
-   {541*OVERSAMPLENR, 110},
-   {551*OVERSAMPLENR, 108},
-   {561*OVERSAMPLENR, 107},
-   {571*OVERSAMPLENR, 105},
-   {581*OVERSAMPLENR, 104},
-   {591*OVERSAMPLENR, 102},
-   {601*OVERSAMPLENR, 101},
-   {611*OVERSAMPLENR, 100},
-   {621*OVERSAMPLENR, 98},
-   {631*OVERSAMPLENR, 97},
-   {641*OVERSAMPLENR, 95},
-   {651*OVERSAMPLENR, 94},
-   {661*OVERSAMPLENR, 92},
-   {671*OVERSAMPLENR, 91},
-   {681*OVERSAMPLENR, 90},
-   {691*OVERSAMPLENR, 88},
-   {701*OVERSAMPLENR, 87},
-   {711*OVERSAMPLENR, 85},
-   {721*OVERSAMPLENR, 84},
-   {731*OVERSAMPLENR, 82},
-   {741*OVERSAMPLENR, 81},
-   {751*OVERSAMPLENR, 79},
-   {761*OVERSAMPLENR, 77},
-   {771*OVERSAMPLENR, 76},
-   {781*OVERSAMPLENR, 74},
-   {791*OVERSAMPLENR, 72},
-   {801*OVERSAMPLENR, 71},
-   {811*OVERSAMPLENR, 69},
-   {821*OVERSAMPLENR, 67},
-   {831*OVERSAMPLENR, 65},
-   {841*OVERSAMPLENR, 63},
-   {851*OVERSAMPLENR, 62},
-   {861*OVERSAMPLENR, 60},
-   {871*OVERSAMPLENR, 57},
-   {881*OVERSAMPLENR, 55},
-   {891*OVERSAMPLENR, 53},
-   {901*OVERSAMPLENR, 51},
-   {911*OVERSAMPLENR, 48},
-   {921*OVERSAMPLENR, 45},
-   {931*OVERSAMPLENR, 42},
-   {941*OVERSAMPLENR, 39},
-   {951*OVERSAMPLENR, 36},
-   {961*OVERSAMPLENR, 32},
-   {981*OVERSAMPLENR, 23},
-   {991*OVERSAMPLENR, 17},
-   {1001*OVERSAMPLENR, 9},
-   {1008*OVERSAMPLENR, 0},
+#if (THERMISTORHEATER_0 == 56) || (THERMISTORHEATER_1 == 56) || (THERMISTORHEATER_2 == 56) || (THERMISTORBED == 56) 
+// Thermistor lookup table for Marlin
+// ./createTemperatureLookup.py --rp=4520 --t1=20.0:121500.0 --t2=150.0:1256.0 --t3=250.0:175.0 --num-temps=72
+const short temptable_56[][2] PROGMEM = {
+   {164, 350},
+   {174, 345},
+   {185, 340},
+   {196, 335},
+   {208, 330},
+   {222, 325},
+   {236, 320},
+   {252, 315},
+   {268, 310},
+   {287, 305},
+   {306, 300},
+   {328, 295},
+   {351, 290},
+   {377, 285},
+   {404, 280},
+   {434, 275},
+   {467, 270},
+   {504, 265},
+   {543, 260},
+   {586, 255},
+   {634, 250},
+   {686, 245},
+   {743, 240},
+   {806, 235},
+   {876, 230},
+   {953, 225},
+   {1037, 220},
+   {1131, 215},
+   {1234, 210},
+   {1348, 205},
+   {1474, 200},
+   {1614, 195},
+   {1769, 190},
+   {1940, 185},
+   {2129, 180},
+   {2339, 175},
+   {2570, 170},
+   {2825, 165},
+   {3106, 160},
+   {3415, 155},
+   {3753, 150},
+   {4123, 145},
+   {4526, 140},
+   {4962, 135},
+   {5431, 130},
+   {5934, 125},
+   {6468, 120},
+   {7032, 115},
+   {7621, 110},
+   {8231, 105},
+   {8855, 100},
+   {9487, 95},
+   {10119, 90},
+   {10743, 85},
+   {11350, 80},
+   {11934, 75},
+   {12487, 70},
+   {13004, 65},
+   {13480, 60},
+   {13913, 55},
+   {14301, 50},
+   {14644, 45},
+   {14944, 40},
+   {15204, 35},
+   {15425, 30},
+   {15612, 25},
+   {15768, 20},
+   {15897, 15},
+   {16002, 10},
+   {16087, 5},
+   {16156, 0}
 };
+
 #endif
 
-// Pt1000 and Pt100 handling
-// 
-// Rt=R0*(1+a*T+b*T*T) [for T>0]
-// a=3.9083E-3, b=-5.775E-7
+#if (THERMISTORHEATER_0 == 57) || (THERMISTORHEATER_1 == 57) || (THERMISTORHEATER_2 == 57) || (THERMISTORBED == 57) 
+// Thermistor lookup table for Marlin
+// ./createTemperatureLookupMarlin.py --rp=4680 --t1=21.4:106300 --t2=187:1023 --t3=248:281 --num-temps=72
+// thermistor table for  extruder
+const short temptable_57[][2] PROGMEM = {
+  {159, 340},
+  {172, 335},
+  {186, 330},
+  {202, 325},
+  {219, 320},
+  {238, 315},
+  {258, 310},
+  {281, 305},
+  {306, 300},
+  {333, 295},
+  {363, 209},
+  {396, 285},
+  {432, 280},
+  {472, 275},
+  {516, 270},
+  {565, 265},
+  {618, 260},
+  {677, 255},
+  {742, 240},
+  {814, 245},
+  {894, 240},
+  {981, 235},
+  {1078, 230},
+  {1184, 225},
+  {1302, 220},
+  {1432, 215},
+  {1574, 210},
+  {1732, 205},
+  {1904, 200},
+  {2094, 195},
+  {2302, 190},
+  {2530, 185},
+  {2779, 180},
+  {3050, 175},
+  {3344, 170},
+  {3662, 165},
+  {4006, 160},
+  {4375, 155},
+  {4770, 150},
+  {5190, 145},
+  {5634, 140},
+  {6101, 135},
+  {6589, 130},
+  {7095, 125},
+  {7617, 120},
+  {8149, 115},
+  {8689, 110},
+  {9230, 105},
+  {9770, 100},
+  {10302, 95},
+  {11810, 90},
+  {12271, 85},
+  {12705, 80},
+  {13111, 75},
+  {13487, 70},
+  {13833, 65},
+  {14149, 60},
+  {14435, 55},
+  {14693, 50},
+  {14923, 45},
+  {15127, 40},
+  {15308, 35},
+  {15466, 30},
+  {15604, 25},
+  {15725, 20},
+  {15828, 15},
+  {15918, 10},
+  {15994, 5},
+  {16060, 0}
+};
 
-#define PtA 3.9083E-3
-#define PtB -5.775E-7
-#define PtRt(T,R0) ((R0)*(1.0+(PtA)*(T)+(PtB)*(T)*(T)))
-#define PtAdVal(T,R0,Rup) (short)(1024/(Rup/PtRt(T,R0)+1))
-#define PtLine(T,R0,Rup) { PtAdVal(T,R0,Rup)*OVERSAMPLENR, T },
+#endif
 
-#if (THERMISTORHEATER_0 == 110) || (THERMISTORHEATER_1 == 110) || (THERMISTORHEATER_2 == 110) || (THERMISTORBED == 110) // Pt100 with 1k0 pullup
-const short temptable_110[][2] PROGMEM = {
-// only few values are needed as the curve is very flat  
-  PtLine(0,100,1000)
-  PtLine(50,100,1000)
-  PtLine(100,100,1000)
-  PtLine(150,100,1000)
-  PtLine(200,100,1000)
-  PtLine(250,100,1000)
-  PtLine(300,100,1000)
-};
-#endif
-#if (THERMISTORHEATER_0 == 147) || (THERMISTORHEATER_1 == 147) || (THERMISTORHEATER_2 == 147) || (THERMISTORBED == 147) // Pt100 with 4k7 pullup
-const short temptable_147[][2] PROGMEM = {
-// only few values are needed as the curve is very flat  
-  PtLine(0,100,4700)
-  PtLine(50,100,4700)
-  PtLine(100,100,4700)
-  PtLine(150,100,4700)
-  PtLine(200,100,4700)
-  PtLine(250,100,4700)
-  PtLine(300,100,4700)
-};
-#endif
-#if (THERMISTORHEATER_0 == 1010) || (THERMISTORHEATER_1 == 1010) || (THERMISTORHEATER_2 == 1010) || (THERMISTORBED == 1010) // Pt1000 with 1k0 pullup
-const short temptable_1010[][2] PROGMEM = {
-  PtLine(0,1000,1000)
-  PtLine(25,1000,1000)
-  PtLine(50,1000,1000)
-  PtLine(75,1000,1000)
-  PtLine(100,1000,1000)
-  PtLine(125,1000,1000)
-  PtLine(150,1000,1000)
-  PtLine(175,1000,1000)
-  PtLine(200,1000,1000)
-  PtLine(225,1000,1000)
-  PtLine(250,1000,1000)
-  PtLine(275,1000,1000)
-  PtLine(300,1000,1000)
-};
-#endif
-#if (THERMISTORHEATER_0 == 1047) || (THERMISTORHEATER_1 == 1047) || (THERMISTORHEATER_2 == 1047) || (THERMISTORBED == 1047) // Pt1000 with 4k7 pullup
-const short temptable_1047[][2] PROGMEM = {
-// only few values are needed as the curve is very flat  
-  PtLine(0,1000,4700)
-  PtLine(50,1000,4700)
-  PtLine(100,1000,4700)
-  PtLine(150,1000,4700)
-  PtLine(200,1000,4700)
-  PtLine(250,1000,4700)
-  PtLine(300,1000,4700)
-};
+#if (THERMISTORHEATER_0 == 58) || (THERMISTORHEATER_1 == 58) || (THERMISTORHEATER_2 == 58) || (THERMISTORBED == 58) 
+// Thermistor lookup table for Marlin
+// ./createTemperatureLookup.py --rp=4670 --t1=21.7:110700.0 --t2=190.0:623.0 --t3=259.0:192.0 --num-temps=72
+// thermistor table for  heatbed
+const short temptable_58[][2] PROGMEM = {
+  {198, 350},
+  {210, 345},
+  {223, 340},
+  {236, 335},
+  {251, 330},
+  {267, 325},
+  {284, 320},
+  {303, 315},
+  {323, 310},
+  {345, 305},
+  {369, 300},
+  {395, 295},
+  {423, 290},
+  {453, 285},
+  {486, 280},
+  {522, 275},
+  {562, 270},
+  {605, 265},
+  {652, 260},
+  {704, 255},
+  {760, 250},
+  {822, 245},
+  {890, 240},
+  {964, 235},
+  {1046, 230},
+  {1136, 225},
+  {1235, 220},
+  {1344, 215},
+  {1464, 210},
+  {1597, 205},
+  {1743, 200},
+  {1903, 195},
+  {2080, 190},
+  {2275, 185},
+  {2489, 180},
+  {2725, 175},
+  {2983, 170},
+  {3267, 165},
+  {3576, 160},
+  {3913, 155},
+  {4280, 150},
+  {4676, 145},
+  {5104, 140},
+  {5561, 135},
+  {6049, 130},
+  {6565, 125},
+  {7108, 120},
+  {7673, 115},
+  {8256, 110},
+  {8852, 105},
+  {9455, 100},
+  {10058, 95},
+  {10654, 90},
+  {11237, 85},
+  {11799, 80},
+  {12334, 75},
+  {12838, 70},
+  {13306, 65},
+  {13734, 60},
+  {14123, 55},
+  {14471, 50},
+  {14779, 45},
+  {15048, 40},
+  {15282, 35},
+  {15481, 30},
+  {15651, 25},
+  {15793, 20},
+  {15912, 15},
+  {16010, 10},
+  {16090, 5},
+  {16154, 0}
+ };
+
 #endif
 
 #define _TT_NAME(_N) temptable_ ## _N

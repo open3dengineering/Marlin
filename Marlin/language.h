@@ -179,6 +179,10 @@
 	#define MSG_BABYSTEP_Y "Babystep Y"
 	#define MSG_BABYSTEP_Z "Babystep Z"
 	#define MSG_ENDSTOP_ABORT "Endstop abort"
+	#define MSG_UTILITY "Utilities"
+	#define MSG_LOAD_UNLOAD_FILAMENT "Change Filament"
+	#define MSG_LOAD_FILAMENT "Load Filament"
+	#define MSG_UNLOAD_FILAMENT "Unload Filament"
 
 // Serial Console Messages
 

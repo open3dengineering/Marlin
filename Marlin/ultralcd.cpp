@@ -48,6 +48,7 @@ static void lcd_status_screen();
 #ifdef ULTIPANEL
 extern bool powersupply;
 static void lcd_main_menu();
+static void lcd_utility_menu();
 static void lcd_tune_menu();
 static void lcd_prepare_menu();
 static void lcd_move_menu();
@@ -176,6 +177,10 @@ menuFunc_t callbackFunc;
 // place-holders for Ki and Kd edits
 float raw_Ki, raw_Kd;
 
+// set to 0 to disable timoutToStatus, 
+// !!! set back to 1 or you won't return to the status Menu automatically 
+bool autoStatusSwitch = 1;
+
 /* Main status screen. It's up to the implementation specific part to show what is needed. As this is very display dependent */
 static void lcd_status_screen()
 {
@@ -262,6 +267,7 @@ static void lcd_main_menu()
 {
     START_MENU();
     MENU_ITEM(back, MSG_WATCH, lcd_status_screen);
+    MENU_ITEM(submenu, MSG_UTILITY, lcd_utility_menu);
     if (movesplanned() || IS_SD_PRINTING)
     {
         MENU_ITEM(submenu, MSG_TUNE, lcd_tune_menu);
@@ -293,6 +299,114 @@ static void lcd_main_menu()
     }
 #endif
     END_MENU();
+}
+
+// helper variable to change status
+int status = 0;
+void lcd_load_filament()
+{
+ 
+  unsigned perc;
+  autoStatusSwitch = 0;  
+  
+  if (lcd_status_update_delay)
+    lcd_status_update_delay--;
+  else
+    lcdDrawUpdate = 1;
+  if (LCD_CLICKED && status == 1)
+    {
+      setTargetHotend0(0);
+      lcd_quick_feedback();
+      currentMenu = lcd_utility_menu;
+      encoderPosition = 0;
+      autoStatusSwitch = 1;  
+    }
+  if ( (int(degTargetHotend(0))) != plaPreheatHotendTemp && status == 0 )
+  {
+    setTargetHotend0(plaPreheatHotendTemp);
+  }
+  if (lcdDrawUpdate) 
+  {
+    if (int(degHotend(0)) < plaPreheatHotendTemp && status == 0) 
+    {
+      perc = ((degHotend(0) * 100) / plaPreheatHotendTemp); 
+      lcd_implementation_draw_change_filament_heatup(perc);
+    }
+    else
+    {
+      status = 1;
+      // use manual_feedrate / 60 / 2 / 10 * 11 to get a fluid extruder movement 
+      float step = manual_feedrate[E_AXIS]/1200 * 12;
+      current_position[E_AXIS] += step;
+      plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], manual_feedrate[E_AXIS]/60, active_extruder);
+
+      lcd_implementation_draw_change_filament_load();
+      lcd_status_update_delay = 10;   /* redraw the screen every second. This is easier then trying keep track of all things that change on the screen */
+    }
+  }
+}
+
+void lcd_unload_filament()
+{
+ 
+  unsigned perc;
+  autoStatusSwitch = 0;  
+  
+  if (lcd_status_update_delay)
+    lcd_status_update_delay--;
+  else
+    lcdDrawUpdate = 1;
+  if (LCD_CLICKED && status == 1)
+    {
+      setTargetHotend0(0);
+      lcd_quick_feedback();
+      currentMenu = lcd_utility_menu;
+      encoderPosition = 0;
+      autoStatusSwitch = 1;  
+    }
+  if ( (int(degTargetHotend(0))) != plaPreheatHotendTemp && status == 0 )
+  {
+    setTargetHotend0(plaPreheatHotendTemp);
+  }
+  if (lcdDrawUpdate) 
+  {
+    if (int(degHotend(0)) < plaPreheatHotendTemp && status == 0) 
+    {
+      perc = ((degHotend(0) * 100) / plaPreheatHotendTemp); 
+      lcd_implementation_draw_change_filament_heatup(perc);
+    }
+    else
+    {
+      status = 1;
+      // use manual_feedrate / 60 / 2 / 10 * 11 to get a fluid extruder movement 
+      float step = manual_feedrate[E_AXIS]/1200 * 12;
+      current_position[E_AXIS] -= step;
+      plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], manual_feedrate[E_AXIS]/60, active_extruder);
+
+      lcd_implementation_draw_change_filament_unload();
+      lcd_status_update_delay = 10;   /* redraw the screen every second. This is easier then trying keep track of all things that change on the screen */
+    }
+  }
+}
+
+static void lcd_load_unload_filament()
+{
+  status = 0;
+  START_MENU();
+  MENU_ITEM(back, MSG_MAIN, lcd_main_menu);
+  MENU_ITEM(submenu, MSG_LOAD_FILAMENT, lcd_load_filament);
+  MENU_ITEM(submenu, MSG_UNLOAD_FILAMENT, lcd_unload_filament);
+  END_MENU();
+} 
+
+
+static void lcd_utility_menu()
+{
+
+  START_MENU();
+  MENU_ITEM(back, MSG_MAIN, lcd_main_menu);
+  MENU_ITEM(submenu, MSG_LOAD_UNLOAD_FILAMENT, lcd_load_unload_filament);
+  END_MENU();
 }
 
 #ifdef SDSUPPORT
@@ -1262,7 +1376,7 @@ void lcd_update()
 #endif
 
 #ifdef ULTIPANEL
-        if(timeoutToStatus < millis() && currentMenu != lcd_status_screen)
+        if(timeoutToStatus < millis() && currentMenu != lcd_status_screen && autoStatusSwitch)
         {
             lcd_return_to_status();
             lcdDrawUpdate = 2;
