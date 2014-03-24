@@ -29,8 +29,8 @@
 	#define MACHINE_NAME "Ultimaker"
 	#define FIRMWARE_URL "http://firmware.ultimaker.com"
 #elif MOTHERBOARD == 80
-	#define MACHINE_NAME "Rumba"
-	#define FIRMWARE_URL "https://github.com/ErikZalm/Marlin/"
+	#define MACHINE_NAME "i3 Berlin"
+	#define FIRMWARE_URL "https://github.com/open3dengineering/i3_Berlin"
 #elif MOTHERBOARD == 77
 	#define MACHINE_NAME "3Drag"
 	#define FIRMWARE_URL "http://3dprint.elettronicain.it/"
@@ -181,8 +181,18 @@
 	#define MSG_ENDSTOP_ABORT "Endstop abort"
 	#define MSG_UTILITY "Utilities"
 	#define MSG_LOAD_UNLOAD_FILAMENT "Change Filament"
-	#define MSG_LOAD_FILAMENT "Load Filament"
-	#define MSG_UNLOAD_FILAMENT "Unload Filament"
+	#define MSG_LOAD_EXTRUDER "Load   Ext."
+	#define MSG_UNLOAD_EXTRUDER "Unload Ext."
+        #define MSG_LOAD_EXTRUDER0 "Load   Ext. 0"
+        #define MSG_UNLOAD_EXTRUDER0 "Unload Ext. 0"
+        #define MSG_LOAD_EXTRUDER1 "Load   Ext. 1"
+        #define MSG_UNLOAD_EXTRUDER1 "Unload Ext. 1"
+        #define MSG_LOAD_EXTRUDER2 "Load   Ext. 2"
+        #define MSG_UNLOAD_EXTRUDER2 "Unload Ext. 2"
+
+
+
+
 
 // Serial Console Messages
 

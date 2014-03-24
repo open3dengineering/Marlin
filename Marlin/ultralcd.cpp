@@ -8,6 +8,7 @@
 #include "stepper.h"
 #include "ConfigurationStore.h"
 
+
 int8_t encoderDiff; /* encoderDiff is updated from interrupt context and added to encoderPosition every LCD update */
 
 /* Configuration settings */
@@ -177,7 +178,7 @@ menuFunc_t callbackFunc;
 // place-holders for Ki and Kd edits
 float raw_Ki, raw_Kd;
 
-// set to 0 to disable timoutToStatus, 
+// set to 0 to disable timeoutToStatus, 
 // !!! set back to 1 or you won't return to the status Menu automatically 
 bool autoStatusSwitch = 1;
 
@@ -316,20 +317,38 @@ void lcd_load_filament()
   if (LCD_CLICKED && status == 1)
     {
       setTargetHotend0(0);
+      setTargetHotend1(0);
+      setTargetHotend2(0);
+      fanSpeed = 0;
+      active_extruder = 0;
       lcd_quick_feedback();
       currentMenu = lcd_utility_menu;
       encoderPosition = 0;
       autoStatusSwitch = 1;  
     }
-  if ( (int(degTargetHotend(0))) != plaPreheatHotendTemp && status == 0 )
+  if ( (int(degTargetHotend(active_extruder))) != plaPreheatHotendTemp && status == 0 )
   {
-    setTargetHotend0(plaPreheatHotendTemp);
+    if (active_extruder == 0)
+    {
+      setTargetHotend0(plaPreheatHotendTemp);
+      fanSpeed = plaPreheatFanSpeed;
+    }
+    else if (active_extruder == 1)
+    {
+      setTargetHotend1(plaPreheatHotendTemp);
+      fanSpeed = plaPreheatFanSpeed;
+    }
+    else if (active_extruder == 2)
+    {
+      setTargetHotend2(plaPreheatHotendTemp);
+      fanSpeed = plaPreheatFanSpeed;
+    }
   }
   if (lcdDrawUpdate) 
   {
-    if (int(degHotend(0)) < plaPreheatHotendTemp && status == 0) 
+    if (int(degHotend(active_extruder)) < plaPreheatHotendTemp && status == 0) 
     {
-      perc = ((degHotend(0) * 100) / plaPreheatHotendTemp); 
+      perc = ((degHotend(active_extruder) * 100) / plaPreheatHotendTemp); 
       lcd_implementation_draw_change_filament_heatup(perc);
     }
     else
@@ -338,7 +357,13 @@ void lcd_load_filament()
       // use manual_feedrate / 60 / 2 / 10 * 11 to get a fluid extruder movement 
       float step = manual_feedrate[E_AXIS]/1200 * 12;
       current_position[E_AXIS] += step;
+
+      #ifdef DELTA
+      calculate_delta(current_position);
+      plan_buffer_line(delta[X_AXIS], delta[Y_AXIS], delta[Z_AXIS], current_position[E_AXIS], manual_feedrate[E_AXIS]/60, active_extruder);
+      #else
       plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], manual_feedrate[E_AXIS]/60, active_extruder);
+      #endif
 
       lcd_implementation_draw_change_filament_load();
       lcd_status_update_delay = 10;   /* redraw the screen every second. This is easier then trying keep track of all things that change on the screen */
@@ -359,20 +384,39 @@ void lcd_unload_filament()
   if (LCD_CLICKED && status == 1)
     {
       setTargetHotend0(0);
+      setTargetHotend1(0);
+      setTargetHotend2(0);
+      fanSpeed = 0;
+      active_extruder = 0;
       lcd_quick_feedback();
       currentMenu = lcd_utility_menu;
       encoderPosition = 0;
       autoStatusSwitch = 1;  
     }
-  if ( (int(degTargetHotend(0))) != plaPreheatHotendTemp && status == 0 )
+  if ( (int(degTargetHotend(active_extruder))) != plaPreheatHotendTemp && status == 0 )
   {
-    setTargetHotend0(plaPreheatHotendTemp);
+    if (active_extruder == 0)
+    {
+      setTargetHotend0(plaPreheatHotendTemp);
+      fanSpeed = plaPreheatFanSpeed;
+    }
+    else if (active_extruder == 1)
+    {
+      setTargetHotend1(plaPreheatHotendTemp);
+      fanSpeed = plaPreheatFanSpeed;
+    }
+    else if (active_extruder == 2)
+    {
+      setTargetHotend2(plaPreheatHotendTemp);
+      fanSpeed = plaPreheatFanSpeed;
+    }
+
   }
   if (lcdDrawUpdate) 
   {
-    if (int(degHotend(0)) < plaPreheatHotendTemp && status == 0) 
+    if (int(degHotend(active_extruder)) < plaPreheatHotendTemp && status == 0) 
     {
-      perc = ((degHotend(0) * 100) / plaPreheatHotendTemp); 
+      perc = ((degHotend(active_extruder) * 100) / plaPreheatHotendTemp); 
       lcd_implementation_draw_change_filament_heatup(perc);
     }
     else
@@ -381,7 +425,13 @@ void lcd_unload_filament()
       // use manual_feedrate / 60 / 2 / 10 * 11 to get a fluid extruder movement 
       float step = manual_feedrate[E_AXIS]/1200 * 12;
       current_position[E_AXIS] -= step;
+      
+      #ifdef DELTA
+      calculate_delta(current_position);
+      plan_buffer_line(delta[X_AXIS], delta[Y_AXIS], delta[Z_AXIS], current_position[E_AXIS], manual_feedrate[E_AXIS]/60, active_extruder);
+      #else
       plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], manual_feedrate[E_AXIS]/60, active_extruder);
+      #endif
 
       lcd_implementation_draw_change_filament_unload();
       lcd_status_update_delay = 10;   /* redraw the screen every second. This is easier then trying keep track of all things that change on the screen */
@@ -394,8 +444,30 @@ static void lcd_load_unload_filament()
   status = 0;
   START_MENU();
   MENU_ITEM(back, MSG_MAIN, lcd_main_menu);
-  MENU_ITEM(submenu, MSG_LOAD_FILAMENT, lcd_load_filament);
-  MENU_ITEM(submenu, MSG_UNLOAD_FILAMENT, lcd_unload_filament);
+  #if EXTRUDERS > 1
+  for (int i=0; i < EXTRUDERS; i++)
+  {
+     active_extruder = i;
+     if ( i == 0 )
+     {
+        MENU_ITEM(submenu, MSG_LOAD_EXTRUDER0, lcd_load_filament);
+	MENU_ITEM(submenu, MSG_UNLOAD_EXTRUDER0, lcd_unload_filament);
+     }
+     if ( i == 1 )
+     {
+        MENU_ITEM(submenu, MSG_LOAD_EXTRUDER1, lcd_load_filament);
+	MENU_ITEM(submenu, MSG_UNLOAD_EXTRUDER1, lcd_unload_filament);
+     }
+     if ( i == 2 )
+     {
+        MENU_ITEM(submenu, MSG_LOAD_EXTRUDER2, lcd_load_filament);
+	MENU_ITEM(submenu, MSG_UNLOAD_EXTRUDER2, lcd_unload_filament);
+     }
+  }
+  #else
+  MENU_ITEM(submenu, MSG_LOAD_EXTRUDER, lcd_load_filament);
+  MENU_ITEM(submenu, MSG_UNLOAD_EXTRUDER, lcd_unload_filament);
+  #endif
   END_MENU();
 } 
 
