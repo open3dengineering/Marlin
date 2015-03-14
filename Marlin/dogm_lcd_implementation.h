@@ -466,7 +466,7 @@ void lcd_implementation_draw_change_filament_heatup(unsigned perc)
 		u8g.print("to heat up.");
 		u8g.drawFrame(1 * DOG_CHAR_WIDTH_LARGE, (u8g.getHeight() - DOG_CHAR_HEIGHT_LARGE) - START_ROW, u8g.getWidth() - (2 * DOG_CHAR_WIDTH_LARGE), DOG_CHAR_HEIGHT_LARGE );
 		u8g.drawBox(1 * DOG_CHAR_WIDTH_LARGE, (u8g.getHeight() - DOG_CHAR_HEIGHT_LARGE) - START_ROW, (unsigned int)((u8g.getWidth() - (2 * DOG_CHAR_WIDTH_LARGE)) * perc / 100) , DOG_CHAR_HEIGHT_LARGE );
-};
+}
 
 void lcd_implementation_draw_change_filament_load()
 {
@@ -479,7 +479,7 @@ void lcd_implementation_draw_change_filament_load()
 		u8g.print("Press button to");
 		u8g.setPrintPos(0 * DOG_CHAR_WIDTH, START_ROW + (4 * DOG_CHAR_HEIGHT) );
 		u8g.print("stop.");
-};
+}
 
 void lcd_implementation_draw_change_filament_unload()
 {
@@ -492,7 +492,18 @@ void lcd_implementation_draw_change_filament_unload()
 		u8g.print("Press button to");
 		u8g.setPrintPos(0 * DOG_CHAR_WIDTH, START_ROW + (4 * DOG_CHAR_HEIGHT) );
 		u8g.print("stop.");
-};
+}
+
+void lcd_implementation_draw_prepare_bed_leveling()
+{
+		u8g.setFont(u8g_font_6x9);
+		u8g.setPrintPos(0 * DOG_CHAR_WIDTH, START_ROW + DOG_CHAR_HEIGHT );
+		u8g.print("Wait for the Extruder");
+		u8g.setPrintPos(0 * DOG_CHAR_WIDTH, START_ROW + (2 * DOG_CHAR_HEIGHT) );
+		u8g.print("to heat up.");
+
+}
+
 
 void lcd_implementation_drawedit(const char* pstr, char* value)
 {

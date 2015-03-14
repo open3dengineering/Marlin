@@ -268,11 +268,11 @@ static void lcd_main_menu()
 {
     START_MENU();
     MENU_ITEM(back, MSG_WATCH, lcd_status_screen);
-    MENU_ITEM(submenu, MSG_UTILITY, lcd_utility_menu);
     if (movesplanned() || IS_SD_PRINTING)
     {
         MENU_ITEM(submenu, MSG_TUNE, lcd_tune_menu);
     }else{
+        MENU_ITEM(submenu, MSG_UTILITY, lcd_utility_menu);
         MENU_ITEM(submenu, MSG_PREPARE, lcd_prepare_menu);
     }
     MENU_ITEM(submenu, MSG_CONTROL, lcd_control_menu);
@@ -326,21 +326,21 @@ void lcd_load_filament()
       encoderPosition = 0;
       autoStatusSwitch = 1;  
     }
-  if ( (int(degTargetHotend(active_extruder))) != plaPreheatHotendTemp && status == 0 )
+  if ( (int(degTargetHotend(active_extruder))) != (plaPreheatHotendTemp + 15) && status == 0 )
   {
     if (active_extruder == 0)
     {
-      setTargetHotend0(plaPreheatHotendTemp);
+      setTargetHotend0((plaPreheatHotendTemp +15));
       fanSpeed = plaPreheatFanSpeed;
     }
     else if (active_extruder == 1)
     {
-      setTargetHotend1(plaPreheatHotendTemp);
+      setTargetHotend1((plaPreheatHotendTemp +15));
       fanSpeed = plaPreheatFanSpeed;
     }
     else if (active_extruder == 2)
     {
-      setTargetHotend2(plaPreheatHotendTemp);
+      setTargetHotend2((plaPreheatHotendTemp +15));
       fanSpeed = plaPreheatFanSpeed;
     }
   }
@@ -471,13 +471,29 @@ static void lcd_load_unload_filament()
   END_MENU();
 } 
 
+static void lcd_bed_leveling()
+{
+  autoStatusSwitch = 0;  
+  
+  if (lcd_status_update_delay)
+    lcd_status_update_delay--;
+  else
+    lcdDrawUpdate = 1;
+  if (status == 0)
+    {
+      enquecommand_P(PSTR("G28"));
+      lcd_implementation_draw_prepare_bed_leveling();	     
+    }
+
+}
 
 static void lcd_utility_menu()
 {
-
+  status = 0; 
   START_MENU();
   MENU_ITEM(back, MSG_MAIN, lcd_main_menu);
   MENU_ITEM(submenu, MSG_LOAD_UNLOAD_FILAMENT, lcd_load_unload_filament);
+  //MENU_ITEM(submenu, MSG_BED_LEVELING, lcd_bed_leveling);
   END_MENU();
 }
 

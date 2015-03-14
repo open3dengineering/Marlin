@@ -189,8 +189,7 @@
         #define MSG_UNLOAD_EXTRUDER1 "Unload Ext. 1"
         #define MSG_LOAD_EXTRUDER2 "Load   Ext. 2"
         #define MSG_UNLOAD_EXTRUDER2 "Unload Ext. 2"
-
-
+        #define MSG_BED_LEVELING "Bed Leveling"
 
 
 
