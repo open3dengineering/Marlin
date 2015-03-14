@@ -331,17 +331,17 @@ void lcd_load_filament()
     if (active_extruder == 0)
     {
       setTargetHotend0((plaPreheatHotendTemp +15));
-      fanSpeed = plaPreheatFanSpeed;
+      //fanSpeed = plaPreheatFanSpeed;
     }
     else if (active_extruder == 1)
     {
       setTargetHotend1((plaPreheatHotendTemp +15));
-      fanSpeed = plaPreheatFanSpeed;
+      //fanSpeed = plaPreheatFanSpeed;
     }
     else if (active_extruder == 2)
     {
       setTargetHotend2((plaPreheatHotendTemp +15));
-      fanSpeed = plaPreheatFanSpeed;
+      //fanSpeed = plaPreheatFanSpeed;
     }
   }
   if (lcdDrawUpdate) 
@@ -371,6 +371,11 @@ void lcd_load_filament()
   }
 }
 
+
+/* helper variable to push filament a little forward */
+
+unsigned unload_filament_push_first = 0;
+
 void lcd_unload_filament()
 {
  
@@ -392,23 +397,24 @@ void lcd_unload_filament()
       currentMenu = lcd_utility_menu;
       encoderPosition = 0;
       autoStatusSwitch = 1;  
+      unload_filament_push_first = 0;
     }
   if ( (int(degTargetHotend(active_extruder))) != plaPreheatHotendTemp && status == 0 )
   {
     if (active_extruder == 0)
     {
-      setTargetHotend0(plaPreheatHotendTemp);
-      fanSpeed = plaPreheatFanSpeed;
+      setTargetHotend0((plaPreheatHotendTemp + 15));
+      //fanSpeed = plaPreheatFanSpeed;
     }
     else if (active_extruder == 1)
     {
-      setTargetHotend1(plaPreheatHotendTemp);
-      fanSpeed = plaPreheatFanSpeed;
+      setTargetHotend1((plaPreheatHotendTemp + 15));
+      //fanSpeed = plaPreheatFanSpeed;
     }
     else if (active_extruder == 2)
     {
-      setTargetHotend2(plaPreheatHotendTemp);
-      fanSpeed = plaPreheatFanSpeed;
+      setTargetHotend2((plaPreheatHotendTemp + 15));
+      //fanSpeed = plaPreheatFanSpeed;
     }
 
   }
@@ -423,15 +429,31 @@ void lcd_unload_filament()
     {
       status = 1;
       // use manual_feedrate / 60 / 2 / 10 * 11 to get a fluid extruder movement 
-      float step = manual_feedrate[E_AXIS]/1200 * 12;
-      current_position[E_AXIS] -= step;
+
+      if ( unload_filament_push_first < 12) { 
+	float step = manual_feedrate[E_AXIS]/1200 * 6;
+	current_position[E_AXIS] += step;
+	unload_filament_push_first += step;
+
+        #ifdef DELTA
+	   calculate_delta(current_position);
+	   plan_buffer_line(delta[X_AXIS], delta[Y_AXIS], delta[Z_AXIS], current_position[E_AXIS], manual_feedrate[E_AXIS]/120, active_extruder);
+        #else
+	   plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], manual_feedrate[E_AXIS]/120, active_extruder);
+        #endif
+
+      } else {
+	float step = manual_feedrate[E_AXIS]/1200 * 12;
+	current_position[E_AXIS] -= step;
+        #ifdef DELTA
+	   calculate_delta(current_position);
+	   plan_buffer_line(delta[X_AXIS], delta[Y_AXIS], delta[Z_AXIS], current_position[E_AXIS], manual_feedrate[E_AXIS]/60, active_extruder);
+        #else
+	   plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], manual_feedrate[E_AXIS]/60, active_extruder);
+        #endif
+
+      }
       
-      #ifdef DELTA
-      calculate_delta(current_position);
-      plan_buffer_line(delta[X_AXIS], delta[Y_AXIS], delta[Z_AXIS], current_position[E_AXIS], manual_feedrate[E_AXIS]/60, active_extruder);
-      #else
-      plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], manual_feedrate[E_AXIS]/60, active_extruder);
-      #endif
 
       lcd_implementation_draw_change_filament_unload();
       lcd_status_update_delay = 10;   /* redraw the screen every second. This is easier then trying keep track of all things that change on the screen */
